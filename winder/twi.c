@@ -1,5 +1,9 @@
 
-# include "eeprom.h"
+#include <avr/io.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "twi.h"
 
 // Initial TWI
 void TWIInit ( void ){

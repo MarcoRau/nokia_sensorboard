@@ -1,5 +1,12 @@
 
+#include <avr/io.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <util/delay.h>
+
 #include "eeprom.h"
+
+#define F_CPU 16000000UL  // 1 MHz
 
 #define EEWRITE		0b10100000
 #define EEREAD		0b10100001
@@ -50,9 +57,9 @@ uint8_t EEWrite2Bytes ( uint16_t u16addr, uint16_t u16data ){
 	data_msb = ( u16data >> 8 );				// MSB data
 	
 	EEWrite1Byte ( u16addr, data_lsb );			// write LSB register
-	delay_ms(50);								// for write
+	_delay_ms(50);								// for write
 	EEWrite1Byte (( u16addr + 1 ),  data_msb );// Write MSB register
-	delay_ms(50);								// for write
+	_delay_ms(50);								// for write
 	
 	return 0;
 }

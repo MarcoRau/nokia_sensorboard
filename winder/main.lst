@@ -168,7 +168,7 @@
  178 00fc 8083      		st Z,r24
  179               	.LM33:
  180               	/* #APP */
- 181               	 ;  156 "main.c" 1
+ 181               	 ;  155 "main.c" 1
  182 00fe 7894      		sei
  183               	 ;  0 "" 2
  184               	/* #NOAPP */
@@ -1264,22 +1264,22 @@
  1311               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:2      *ABS*:0000003f __SREG__
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:3      *ABS*:0000003e __SP_H__
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:4      *ABS*:0000003d __SP_L__
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:5      *ABS*:00000034 __CCP__
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:18     .text:00000000 __vector_11
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:2      *ABS*:0000003f __SREG__
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:3      *ABS*:0000003e __SP_H__
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:4      *ABS*:0000003d __SP_L__
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:5      *ABS*:00000034 __CCP__
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:18     .text:00000000 __vector_11
                             *COM*:00000001 ms10
                             *COM*:00000001 entprell
                             *COM*:00000001 ms100
                             *COM*:00000001 sec
                             *COM*:00000001 min
                             *COM*:00000001 state
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:97     .text:0000007e main
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:791    .progmem.data:000001f8 Font5x7
-C:\Users\RAUM\AppData\Local\Temp/ccpfkLOz.s:284    .progmem.data:00000000 batman
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:97     .text:0000007e main
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:791    .progmem.data:000001f8 Font5x7
+C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:284    .progmem.data:00000000 batman
                             *COM*:00000001 ms
 
 UNDEFINED SYMBOLS

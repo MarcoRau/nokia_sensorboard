@@ -16,11 +16,10 @@
 #include "glcd/fonts/Liberation_Sans15x21_Numbers.h"
 #include "glcd/fonts/font5x7.h"
 #include <avr/pgmspace.h>
-#include <util/delay.h>
 
 #include "eeprom.h"
 
-#define F_CPU 16000000UL  // 1 MHz
+//#define F_CPU 16000000UL  // 1 MHz
 
 /* Function prototypes */
 static void setup(void);
@@ -162,7 +161,6 @@ int main(void)
 	glcd_write();
 	
 	min = 1;
-	
 	
 	// eeprom
 	

@@ -1,0 +1,150 @@
+   1               		.file	"twi.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	TWIInit
+  18               	TWIInit:
+  19               	.LFB3:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 1092 B900 		sts 185,__zero_reg__
+  25               	.LM3:
+  26 0004 8CE0      		ldi r24,lo8(12)
+  27 0006 8093 B800 		sts 184,r24
+  28               	.LM4:
+  29 000a 84E0      		ldi r24,lo8(4)
+  30 000c 8093 BC00 		sts 188,r24
+  31               	/* epilogue start */
+  32               	.LM5:
+  33 0010 0895      		ret
+  34               	.LFE3:
+  36               	.global	TWIStart
+  38               	TWIStart:
+  39               	.LFB4:
+  40               	.LM6:
+  41               	/* prologue: function */
+  42               	/* frame size = 0 */
+  43               	.LM7:
+  44 0012 84EA      		ldi r24,lo8(-92)
+  45 0014 8093 BC00 		sts 188,r24
+  46               	.L4:
+  47               	.LM8:
+  48 0018 8091 BC00 		lds r24,188
+  49 001c 87FF      		sbrs r24,7
+  50 001e 00C0      		rjmp .L4
+  51               	/* epilogue start */
+  52               	.LM9:
+  53 0020 0895      		ret
+  54               	.LFE4:
+  56               	.global	TWIStop
+  58               	TWIStop:
+  59               	.LFB5:
+  60               	.LM10:
+  61               	/* prologue: function */
+  62               	/* frame size = 0 */
+  63               	.LM11:
+  64 0022 84E9      		ldi r24,lo8(-108)
+  65 0024 8093 BC00 		sts 188,r24
+  66               	/* epilogue start */
+  67               	.LM12:
+  68 0028 0895      		ret
+  69               	.LFE5:
+  71               	.global	TWIWrite
+  73               	TWIWrite:
+  74               	.LFB6:
+  75               	.LM13:
+  76               	.LVL0:
+  77               	/* prologue: function */
+  78               	/* frame size = 0 */
+  79               	.LM14:
+  80 002a 8093 BB00 		sts 187,r24
+  81               	.LM15:
+  82 002e 84E8      		ldi r24,lo8(-124)
+  83               	.LVL1:
+  84 0030 8093 BC00 		sts 188,r24
+  85               	.L10:
+  86               	.LM16:
+  87 0034 8091 BC00 		lds r24,188
+  88 0038 87FF      		sbrs r24,7
+  89 003a 00C0      		rjmp .L10
+  90               	/* epilogue start */
+  91               	.LM17:
+  92 003c 0895      		ret
+  93               	.LFE6:
+  95               	.global	TWIReadACK
+  97               	TWIReadACK:
+  98               	.LFB7:
+  99               	.LM18:
+ 100               	/* prologue: function */
+ 101               	/* frame size = 0 */
+ 102               	.LM19:
+ 103 003e 84EC      		ldi r24,lo8(-60)
+ 104 0040 8093 BC00 		sts 188,r24
+ 105               	.L14:
+ 106               	.LM20:
+ 107 0044 8091 BC00 		lds r24,188
+ 108 0048 87FF      		sbrs r24,7
+ 109 004a 00C0      		rjmp .L14
+ 110               	.LM21:
+ 111 004c 8091 BB00 		lds r24,187
+ 112               	/* epilogue start */
+ 113               	.LM22:
+ 114 0050 0895      		ret
+ 115               	.LFE7:
+ 117               	.global	TWIReadNACK
+ 119               	TWIReadNACK:
+ 120               	.LFB8:
+ 121               	.LM23:
+ 122               	/* prologue: function */
+ 123               	/* frame size = 0 */
+ 124               	.LM24:
+ 125 0052 84E8      		ldi r24,lo8(-124)
+ 126 0054 8093 BC00 		sts 188,r24
+ 127               	.L18:
+ 128               	.LM25:
+ 129 0058 8091 BC00 		lds r24,188
+ 130 005c 87FF      		sbrs r24,7
+ 131 005e 00C0      		rjmp .L18
+ 132               	.LM26:
+ 133 0060 8091 BB00 		lds r24,187
+ 134               	/* epilogue start */
+ 135               	.LM27:
+ 136 0064 0895      		ret
+ 137               	.LFE8:
+ 139               	.global	TWIGetStatus
+ 141               	TWIGetStatus:
+ 142               	.LFB9:
+ 143               	.LM28:
+ 144               	/* prologue: function */
+ 145               	/* frame size = 0 */
+ 146               	.LM29:
+ 147 0066 8091 B900 		lds r24,185
+ 148               	.LM30:
+ 149 006a 887F      		andi r24,lo8(-8)
+ 150               	/* epilogue start */
+ 151 006c 0895      		ret
+ 152               	.LFE9:
+ 226               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 twi.c
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:2      *ABS*:0000003f __SREG__
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:3      *ABS*:0000003e __SP_H__
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:4      *ABS*:0000003d __SP_L__
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:5      *ABS*:00000034 __CCP__
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:18     .text:00000000 TWIInit
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:38     .text:00000012 TWIStart
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:58     .text:00000022 TWIStop
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:73     .text:0000002a TWIWrite
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:97     .text:0000003e TWIReadACK
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:119    .text:00000052 TWIReadNACK
+C:\Users\RAUM\AppData\Local\Temp/ccNDr0D2.s:141    .text:00000066 TWIGetStatus
+
+NO UNDEFINED SYMBOLS
