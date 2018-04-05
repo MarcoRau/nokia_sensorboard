@@ -16,13 +16,11 @@
 #include "glcd/fonts/Liberation_Sans15x21_Numbers.h"
 #include "glcd/fonts/font5x7.h"
 #include <avr/pgmspace.h>
-#define F_CPU 16000000UL  // 1 MHz
+#include <util/delay.h>
 
-// EEPROM
-#define ERROR		1
-#define SUCCESS		0
-#define EEWRITE		0b10100000
-#define EEREAD		0b10100001
+#include "eeprom.h"
+
+#define F_CPU 16000000UL  // 1 MHz
 
 /* Function prototypes */
 static void setup(void);
@@ -64,174 +62,6 @@ ISR (TIMER1_COMPA_vect)
 		}
 	}
 }
-// EEPROM-------------------------------------------------------------------------
-
-void TWIInit( void ){
-	// set SCL to 400kHz
-	TWSR = 0x00;
-	TWBR = 0x0C;
-	// enable TWI
-	TWCR = ( 1 << TWEN );
-}
-
-void TWIStart ( void ){
-	TWCR = ( 1 << TWINT ) | ( 1 << TWSTA ) | ( 1 << TWEN );
-	while (( TWCR & ( 1 << TWINT )) == 0 );
-}
-
-void TWIStop ( void ){
-	TWCR = ( 1 << TWINT ) | ( 1 << TWSTO ) | ( 1 << TWEN );
-}
-
-void TWIWrite ( uint8_t u8data ){
-	TWDR = u8data;
-	TWCR = ( 1 << TWINT ) | ( 1 << TWEN );
-	while (( TWCR & ( 1 << TWINT )) == 0 );
-}
-
-uint8_t TWIReadACK ( void ){
-	TWCR = ( 1 << TWINT ) | ( 1 << TWEN )|( 1 << TWEA );
-	while (( TWCR & ( 1 << TWINT )) == 0 );
-	return TWDR;
-}
-// read byte with NACK
-uint8_t TWIReadNACK ( void ){
-	TWCR = ( 1 << TWINT ) | ( 1 << TWEN );
-	while (( TWCR & ( 1 << TWINT )) == 0 );
-	return TWDR;
-}
-
-uint8_t TWIGetStatus( void ){
-	uint8_t status;
-	// mask status
-	status = TWSR & 0xF8;
-	return status;
-}
-
-uint8_t EEWriteByte ( uint16_t u16addr, uint8_t u8data ){
-	uint8_t addr_l, addr_h;
-	addr_l = u16addr;
-	addr_h = (u16addr>>8);
-	
-    TWIStart();
-    if ( TWIGetStatus() != 0x08 )
-        return ERROR;
-	TWIWrite(EEWRITE);
-    if ( TWIGetStatus() != 0x18 )
-        return ERROR;   
-	TWIWrite(addr_l);
-	if ( TWIGetStatus() != 0x28 )
-        return ERROR;
-	TWIWrite(addr_h);
-	if ( TWIGetStatus() != 0x28 )
-        return ERROR;
-	TWIWrite(u8data);
-	if ( TWIGetStatus() != 0x28 )
-        return ERROR;
-	TWIStop();
-    return SUCCESS;
-}
-
-
-uint8_t EEReadByte ( uint16_t u16addr ){
-	uint8_t addr_l, addr_h;
-	addr_l = u16addr;
-	addr_h = (u16addr>>8);
-	uint8_t u8data = 0;
-	
-    //uint8_t databyte;
-    TWIStart();
-    if ( TWIGetStatus() != 0x08 )
-        return 2;
-	TWIWrite(EEWRITE);
-	if ( TWIGetStatus() != 0x18 )
-        return 5;
-	TWIWrite(addr_l);
-	if ( TWIGetStatus() != 0x28 )
-        return 5;
-	TWIWrite(addr_h);
-	if ( TWIGetStatus() != 0x28 )
-        return 5;
-    TWIStart();
-    if ( TWIGetStatus() != 0x10 )
-        return 5;
-	TWIWrite(EEREAD);
-	if ( TWIGetStatus() != 0x40 )
-        return 5;
-	u8data = TWIReadNACK();
-    if ( TWIGetStatus() != 0x58 )
-        return 7;
-    TWIStop();
-	
-    return u8data;
-}
-
-
-/* NOCH NICHT!!!
-
-uint8_t EEWritePeage ( uint8_t page, uint8_t *u8data ){
-	// calculate page address
-	uint8_t u8paddr = 0;
-	uint8_t i;
-	u8paddr = page << 4;
-	TWIStart();
-	if ( TWIGetStatus() != 0x08 )
-		return ERROR;
-	// select page start address and send A2 A1 A0 bits send write command
-	TWIWrite ((( EEWRITE ) | ( u8paddr >> 3 )) & ( ~1 ));
-	if ( TWIGetStatus() != 0x18 )
-		return ERROR;
-	// send the rest of address
-	if ( TWIGetStatus() != 0x28 )
-		return ERROR;
-	// write page to eeprom
-	for ( i = 0; i < 16; i++ ){
-		TWIWrite ( *u8data++ );
-			if ( TWIGetStatus() != 0x28 )
-				return ERROR;
-	}
-	TWIStop();
-	return SUCCESS;
-}
-
-uint8_t EEReadPage ( uint8_t page, uint8_t *u8data ){
-	// calculate page address
-	uint8_t u8paddr = 0;
-	uint8_t i;
-	u8paddr = page << 4;
-	TWIStart();
-	if ( TWIGetStatus() != 0x08 )
-		return ERROR;
-	// select page start address and send A2 A1 A0 bits send write command
-	TWIWrite ((( EEREAD ) | ( u8paddr >> 3 )) & ( ~1 ));
-	if ( TWIGetStatus() != 0x18 )
-		return ERROR;
-	// send the rest of address
-	TWIWrite (( u8paddr << 4 ));
-	if ( TWIGetStatus() != 0x28 )
-		return ERROR;
-	// send start
-	TWIStart();
-	if ( TWIGetStatus() != 0x10 )
-		return ERROR;
-	// select devise and send read bit
-	TWIWrite ((( EEREAD ) | ( u8paddr >> 3 )) | 1 );
-	if ( TWIGetStatus() != 0x40 )
-		return ERROR;
-	for ( i = 0; i < 15; i++ ){
-		*u8data++ = TWIReadACK();
-			if ( TWIGetStatus() != 0x50 )
-				return ERROR;
-	}
-	*u8data = TWIReadNACK();
-	if ( TWIGetStatus() != 0x58 )
-		return ERROR;
-	TWIStop();
-	return SUCCESS;
-}
-*/
-
-// -----------------------------------------------------------------------------
 
 const unsigned char batman[] PROGMEM= 
 { 
@@ -290,13 +120,13 @@ const unsigned char batman[] PROGMEM=
 	
 int main(void)
 {	
-	uint8_t test = 22;
+	uint16_t test = 0;
 	char string[30] = " ";
 	
 	/* Backlight pin PL3, set as output, set high for 100% output */
 	DDRB |= (1<<PB2);
-	PORTB |= (1<<PB2);
-	//PORTB &= ~(1<<PB2);
+	//PORTB |= (1<<PB2);
+	PORTB &= ~(1<<PB2);
 	
 	DDRC &= ~(1<<PC0); //Eingang Hallsensor
 	PORTC |= (1<<PC0);	//Pullup Hallsensor einschalten
@@ -335,20 +165,27 @@ int main(void)
 	
 	
 	// eeprom
+	
 	TWIInit();
-	EEWriteByte(50,80);
-	delay_ms(500);
-	test = EEReadByte(50);
+	
+	EEWrite2Bytes(1, 5463);
+	
+	test = EERead2Bytes(1);
+	
 	// Display
 	glcd_tiny_set_font(Font5x7,5,7,32,127);
 	glcd_clear_buffer();
 	sprintf(string,"%d", test);
 	glcd_draw_string_xy(0,0,string);
 	glcd_write();
-	
 	/*
 	while(1) 
 	{
+		if (!( PIND & ( 1 << PD6 ))){
+			glcd_draw_bitmap(batman);
+			glcd_write();
+		}
+		
 		switch(8)
 		{
 			case 1:	glcd_test_circles();
@@ -369,7 +206,10 @@ int main(void)
 					glcd_write();
 					break;
 		}//end of switch
+		
 	}//End of while
 	*/
+	//---------------------------------------------
+	
 	return 0;
 }//end of main
