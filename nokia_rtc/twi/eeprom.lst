@@ -1,0 +1,218 @@
+   1               		.file	"eeprom.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	EERead1Byte
+  18               	EERead1Byte:
+  19               	.LFB8:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 0F93      		push r16
+  23 0002 1F93      		push r17
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26 0004 182F      		mov r17,r24
+  27 0006 092F      		mov r16,r25
+  28               	.LVL1:
+  29               	.LM2:
+  30 0008 0E94 0000 		call TWIStart
+  31               	.LVL2:
+  32               	.LM3:
+  33 000c 80EA      		ldi r24,lo8(-96)
+  34 000e 0E94 0000 		call TWIWrite
+  35               	.LM4:
+  36 0012 812F      		mov r24,r17
+  37 0014 0E94 0000 		call TWIWrite
+  38               	.LM5:
+  39 0018 802F      		mov r24,r16
+  40 001a 0E94 0000 		call TWIWrite
+  41               	.LM6:
+  42 001e 0E94 0000 		call TWIStart
+  43               	.LM7:
+  44 0022 81EA      		ldi r24,lo8(-95)
+  45 0024 0E94 0000 		call TWIWrite
+  46               	.LM8:
+  47 0028 0E94 0000 		call TWIReadNACK
+  48 002c 182F      		mov r17,r24
+  49               	.LVL3:
+  50               	.LM9:
+  51 002e 0E94 0000 		call TWIStop
+  52               	.LM10:
+  53 0032 812F      		mov r24,r17
+  54               	/* epilogue start */
+  55 0034 1F91      		pop r17
+  56               	.LVL4:
+  57 0036 0F91      		pop r16
+  58               	.LVL5:
+  59 0038 0895      		ret
+  60               	.LFE8:
+  62               	.global	EERead2Bytes
+  64               	EERead2Bytes:
+  65               	.LFB10:
+  66               	.LM11:
+  67               	.LVL6:
+  68 003a FF92      		push r15
+  69 003c 0F93      		push r16
+  70 003e 1F93      		push r17
+  71               	/* prologue: function */
+  72               	/* frame size = 0 */
+  73 0040 8C01      		movw r16,r24
+  74               	.LM12:
+  75 0042 0E94 0000 		call EERead1Byte
+  76               	.LVL7:
+  77 0046 F82E      		mov r15,r24
+  78               	.LM13:
+  79 0048 C801      		movw r24,r16
+  80 004a 0196      		adiw r24,1
+  81 004c 0E94 0000 		call EERead1Byte
+  82 0050 382F      		mov r19,r24
+  83 0052 20E0      		ldi r18,lo8(0)
+  84 0054 2F0D      		add r18,r15
+  85 0056 311D      		adc r19,__zero_reg__
+  86               	.LM14:
+  87 0058 C901      		movw r24,r18
+  88               	/* epilogue start */
+  89 005a 1F91      		pop r17
+  90 005c 0F91      		pop r16
+  91               	.LVL8:
+  92 005e FF90      		pop r15
+  93 0060 0895      		ret
+  94               	.LFE10:
+  96               	.global	EEWrite1Byte
+  98               	EEWrite1Byte:
+  99               	.LFB7:
+ 100               	.LM15:
+ 101               	.LVL9:
+ 102 0062 FF92      		push r15
+ 103 0064 0F93      		push r16
+ 104 0066 1F93      		push r17
+ 105               	/* prologue: function */
+ 106               	/* frame size = 0 */
+ 107 0068 182F      		mov r17,r24
+ 108 006a 092F      		mov r16,r25
+ 109               	.LVL10:
+ 110 006c F62E      		mov r15,r22
+ 111               	.LM16:
+ 112 006e 0E94 0000 		call TWIStart
+ 113               	.LVL11:
+ 114               	.LM17:
+ 115 0072 80EA      		ldi r24,lo8(-96)
+ 116 0074 0E94 0000 		call TWIWrite
+ 117               	.LM18:
+ 118 0078 812F      		mov r24,r17
+ 119 007a 0E94 0000 		call TWIWrite
+ 120               	.LM19:
+ 121 007e 802F      		mov r24,r16
+ 122 0080 0E94 0000 		call TWIWrite
+ 123               	.LM20:
+ 124 0084 8F2D      		mov r24,r15
+ 125 0086 0E94 0000 		call TWIWrite
+ 126               	.LM21:
+ 127 008a 0E94 0000 		call TWIStop
+ 128               	.LM22:
+ 129 008e 80E0      		ldi r24,lo8(0)
+ 130               	/* epilogue start */
+ 131 0090 1F91      		pop r17
+ 132               	.LVL12:
+ 133 0092 0F91      		pop r16
+ 134               	.LVL13:
+ 135 0094 FF90      		pop r15
+ 136               	.LVL14:
+ 137 0096 0895      		ret
+ 138               	.LFE7:
+ 140               	.global	EEWrite2Bytes
+ 142               	EEWrite2Bytes:
+ 143               	.LFB9:
+ 144               	.LM23:
+ 145               	.LVL15:
+ 146 0098 DF92      		push r13
+ 147 009a EF92      		push r14
+ 148 009c FF92      		push r15
+ 149 009e 0F93      		push r16
+ 150 00a0 1F93      		push r17
+ 151               	/* prologue: function */
+ 152               	/* frame size = 0 */
+ 153 00a2 7C01      		movw r14,r24
+ 154 00a4 D72E      		mov r13,r23
+ 155               	.LVL16:
+ 156               	.LM24:
+ 157 00a6 0E94 0000 		call EEWrite1Byte
+ 158               	.LVL17:
+ 159               	.LBB18:
+ 160               	.LBB19:
+ 161               	.LBB20:
+ 162               	.LBB21:
+ 163               	.LM25:
+ 164 00aa 04ED      		ldi r16,lo8(12500)
+ 165 00ac 10E3      		ldi r17,hi8(12500)
+ 166 00ae C801      		movw r24,r16
+ 167               	.LVL18:
+ 168               	/* #APP */
+ 169               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 170 00b0 0197      		1: sbiw r24,1
+ 171 00b2 01F4      		brne 1b
+ 172               	 ;  0 "" 2
+ 173               	/* #NOAPP */
+ 174               	.LBE21:
+ 175               	.LBE20:
+ 176               	.LBE19:
+ 177               	.LBE18:
+ 178               	.LM26:
+ 179 00b4 C701      		movw r24,r14
+ 180               	.LVL19:
+ 181 00b6 0196      		adiw r24,1
+ 182 00b8 6D2D      		mov r22,r13
+ 183 00ba 0E94 0000 		call EEWrite1Byte
+ 184               	.LBB22:
+ 185               	.LBB23:
+ 186               	.LBB24:
+ 187               	.LBB25:
+ 188               	.LM27:
+ 189 00be C801      		movw r24,r16
+ 190               	.LVL20:
+ 191               	/* #APP */
+ 192               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 193 00c0 0197      		1: sbiw r24,1
+ 194 00c2 01F4      		brne 1b
+ 195               	 ;  0 "" 2
+ 196               	/* #NOAPP */
+ 197               	.LBE25:
+ 198               	.LBE24:
+ 199               	.LBE23:
+ 200               	.LBE22:
+ 201               	.LM28:
+ 202 00c4 80E0      		ldi r24,lo8(0)
+ 203               	.LVL21:
+ 204               	/* epilogue start */
+ 205 00c6 1F91      		pop r17
+ 206 00c8 0F91      		pop r16
+ 207 00ca FF90      		pop r15
+ 208 00cc EF90      		pop r14
+ 209               	.LVL22:
+ 210 00ce DF90      		pop r13
+ 211               	.LVL23:
+ 212 00d0 0895      		ret
+ 213               	.LFE9:
+ 263               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 eeprom.c
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:2      *ABS*:0000003f __SREG__
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:3      *ABS*:0000003e __SP_H__
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:4      *ABS*:0000003d __SP_L__
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:5      *ABS*:00000034 __CCP__
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:18     .text:00000000 EERead1Byte
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:64     .text:0000003a EERead2Bytes
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:98     .text:00000062 EEWrite1Byte
+C:\Users\RAUM\AppData\Local\Temp/ccpfey51.s:142    .text:00000098 EEWrite2Bytes
+
+UNDEFINED SYMBOLS
+TWIStart
+TWIWrite
+TWIReadNACK
+TWIStop
