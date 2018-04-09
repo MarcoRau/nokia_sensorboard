@@ -141,60 +141,55 @@ int main(void)
 				glcd_draw_string_xy(0,0,string);
 				glcd_write();
 				
-				y = 0;
-				addr = 0;
-				addr1 = 0;
-				addr2 = 0;
+				y		= 0;
+				addr	= 0;
+				addr1	= 0;
+				addr2	= 0;
 				
-				while( addr < 0xFF ){
+				do{
 				
-					addr1++;
+					addr1++;								// low nibble plus eins
 					
 					if( addr1 == 0x0F ){
-						addr2++;
+						addr2++;							// high nibble plus eins
 						addr1 = 0;
 					}
 					
-					addr = ( addr1 + ( addr2 << 4 ));
+					addr = ( addr1 + ( addr2 << 4 ));		// Adresse zusammensetzen
 					
 					TWIStart();
 					TWIWrite ( addr );
 					
-					
-					
 					if ( TWIGetStatus() == 0x18 ){
-						sprintf(string,"0x%x", addr);
+						sprintf(string,"0x%x", addr);		// Vorhandene Adresse ausschreiben
 						glcd_draw_string_xy(40,y,string);
 						glcd_write();
 						y += 8;
 					}
 					
-					if( addr > 0xFF ){
-						sprintf(string,"FINISH        ");
-						glcd_draw_string_xy(0,40,string);
-						glcd_write();
-					}
-					
-					else{
-						sprintf(string,"act addr.:0x%x", addr);
-						glcd_draw_string_xy(0,40,string);
-						glcd_write();
-					}
+					sprintf(string,"act addr.:0x%x", addr);	// Aktuelle Adresse ausschreiben
+					glcd_draw_string_xy(0,40,string);
+					glcd_write();
 					
 					TWIStop();
 					
-				}
+				}while( addr < 0xFF );
 				
+				sprintf(string,"FINISH        ");
+				glcd_draw_string_xy(0,40,string);
+				glcd_write();
+		
 				zustand = nichts;
 				
 			break;
 			case reset:
 				
 				glcd_clear();
-				glcd_write();
-				glcd_tiny_set_font(Font5x7,5,7,32,127);
-				glcd_clear_buffer();
 				
+				y		= 0;
+				addr	= 0;
+				addr1	= 0;
+				addr2	= 0;
 				
 			break;
 			

@@ -190,8 +190,8 @@
  200               	.LM39:
  201 0116 81E0      		ldi r24,lo8(1)
  202 0118 90E0      		ldi r25,hi8(1)
- 203 011a 67E5      		ldi r22,lo8(5463)
- 204 011c 75E1      		ldi r23,hi8(5463)
+ 203 011a 64EF      		ldi r22,lo8(500)
+ 204 011c 71E0      		ldi r23,hi8(500)
  205 011e 0E94 0000 		call EEWrite2Bytes
  206               	.LM40:
  207 0122 81E0      		ldi r24,lo8(1)
@@ -1264,22 +1264,22 @@
  1311               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:2      *ABS*:0000003f __SREG__
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:3      *ABS*:0000003e __SP_H__
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:4      *ABS*:0000003d __SP_L__
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:5      *ABS*:00000034 __CCP__
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:18     .text:00000000 __vector_11
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:2      *ABS*:0000003f __SREG__
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:3      *ABS*:0000003e __SP_H__
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:4      *ABS*:0000003d __SP_L__
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:5      *ABS*:00000034 __CCP__
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:18     .text:00000000 __vector_11
                             *COM*:00000001 ms10
                             *COM*:00000001 entprell
                             *COM*:00000001 ms100
                             *COM*:00000001 sec
                             *COM*:00000001 min
                             *COM*:00000001 state
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:97     .text:0000007e main
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:791    .progmem.data:000001f8 Font5x7
-C:\Users\RAUM\AppData\Local\Temp/ccQi8tqy.s:284    .progmem.data:00000000 batman
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:97     .text:0000007e main
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:791    .progmem.data:000001f8 Font5x7
+C:\Users\RAUM\AppData\Local\Temp/ccE7ZKeq.s:284    .progmem.data:00000000 batman
                             *COM*:00000001 ms
 
 UNDEFINED SYMBOLS

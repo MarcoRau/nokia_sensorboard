@@ -133,18 +133,18 @@
  226               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 twi.c
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:2      *ABS*:0000003f __SREG__
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:3      *ABS*:0000003e __SP_H__
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:4      *ABS*:0000003d __SP_L__
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:5      *ABS*:00000034 __CCP__
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:18     .text:00000000 TWIInit
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:38     .text:00000012 TWIStart
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:58     .text:00000022 TWIStop
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:73     .text:0000002a TWIWrite
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:97     .text:0000003e TWIReadACK
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:119    .text:00000052 TWIReadNACK
-C:\Users\RAUM\AppData\Local\Temp/ccpzZ7r9.s:141    .text:00000066 TWIGetStatus
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:2      *ABS*:0000003f __SREG__
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:3      *ABS*:0000003e __SP_H__
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:4      *ABS*:0000003d __SP_L__
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:5      *ABS*:00000034 __CCP__
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:18     .text:00000000 TWIInit
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:38     .text:00000012 TWIStart
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:58     .text:00000022 TWIStop
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:73     .text:0000002a TWIWrite
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:97     .text:0000003e TWIReadACK
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:119    .text:00000052 TWIReadNACK
+C:\Users\RAUM\AppData\Local\Temp/ccUDWrJS.s:141    .text:00000066 TWIGetStatus
 
 NO UNDEFINED SYMBOLS

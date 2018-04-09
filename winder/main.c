@@ -166,7 +166,7 @@ int main(void)
 	
 	TWIInit();
 	
-	EEWrite2Bytes(1, 5463);
+	EEWrite2Bytes(1, 500);
 	
 	test = EERead2Bytes(1);
 	
