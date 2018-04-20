@@ -6,8 +6,6 @@
 
 #include "eeprom.h"
 
-//#define F_CPU 16000000UL  // 1 MHz
-
 #define EEWRITE		0b10100000
 #define EEREAD		0b10100001
 
@@ -27,7 +25,6 @@ uint8_t EEWrite1Byte ( uint16_t u16addr, uint8_t u8data ){
 	
 	return 0;
 }
-
 
 uint8_t EERead1Byte ( uint16_t u16addr ){
 

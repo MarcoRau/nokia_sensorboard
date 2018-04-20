@@ -200,16 +200,16 @@
  263               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 eeprom.c
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:2      *ABS*:0000003f __SREG__
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:3      *ABS*:0000003e __SP_H__
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:4      *ABS*:0000003d __SP_L__
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:5      *ABS*:00000034 __CCP__
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:18     .text:00000000 EERead1Byte
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:64     .text:0000003a EERead2Bytes
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:98     .text:00000062 EEWrite1Byte
-C:\Users\RAUM\AppData\Local\Temp/ccyy48gM.s:142    .text:00000098 EEWrite2Bytes
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:2      *ABS*:0000003f __SREG__
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:3      *ABS*:0000003e __SP_H__
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:4      *ABS*:0000003d __SP_L__
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:5      *ABS*:00000034 __CCP__
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:18     .text:00000000 EERead1Byte
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:64     .text:0000003a EERead2Bytes
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:98     .text:00000062 EEWrite1Byte
+C:\Users\RAUM\AppData\Local\Temp/ccfGsKKj.s:142    .text:00000098 EEWrite2Bytes
 
 UNDEFINED SYMBOLS
 TWIStart

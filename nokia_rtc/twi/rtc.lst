@@ -1,0 +1,447 @@
+   1               		.file	"rtc.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	RTCReadByte
+  18               	RTCReadByte:
+  19               	.LFB9:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 1F93      		push r17
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0002 182F      		mov r17,r24
+  26               	.LM2:
+  27 0004 0E94 0000 		call TWIStart
+  28               	.LVL1:
+  29               	.LM3:
+  30 0008 8EED      		ldi r24,lo8(-34)
+  31 000a 0E94 0000 		call TWIWrite
+  32               	.LM4:
+  33 000e 812F      		mov r24,r17
+  34 0010 0E94 0000 		call TWIWrite
+  35               	.LM5:
+  36 0014 0E94 0000 		call TWIStart
+  37               	.LM6:
+  38 0018 8FED      		ldi r24,lo8(-33)
+  39 001a 0E94 0000 		call TWIWrite
+  40               	.LM7:
+  41 001e 0E94 0000 		call TWIReadNACK
+  42 0022 182F      		mov r17,r24
+  43               	.LVL2:
+  44               	.LM8:
+  45 0024 0E94 0000 		call TWIStop
+  46               	.LM9:
+  47 0028 812F      		mov r24,r17
+  48               	/* epilogue start */
+  49 002a 1F91      		pop r17
+  50               	.LVL3:
+  51 002c 0895      		ret
+  52               	.LFE9:
+  54               	.global	RTCWriteByte
+  56               	RTCWriteByte:
+  57               	.LFB8:
+  58               	.LM10:
+  59               	.LVL4:
+  60 002e 0F93      		push r16
+  61 0030 1F93      		push r17
+  62               	/* prologue: function */
+  63               	/* frame size = 0 */
+  64 0032 182F      		mov r17,r24
+  65 0034 062F      		mov r16,r22
+  66               	.LM11:
+  67 0036 0E94 0000 		call TWIStart
+  68               	.LVL5:
+  69               	.LM12:
+  70 003a 8EED      		ldi r24,lo8(-34)
+  71 003c 0E94 0000 		call TWIWrite
+  72               	.LM13:
+  73 0040 812F      		mov r24,r17
+  74 0042 0E94 0000 		call TWIWrite
+  75               	.LM14:
+  76 0046 802F      		mov r24,r16
+  77 0048 0E94 0000 		call TWIWrite
+  78               	.LM15:
+  79 004c 0E94 0000 		call TWIStop
+  80               	.LBB18:
+  81               	.LBB19:
+  82               	.LBB20:
+  83               	.LBB21:
+  84               	.LM16:
+  85 0050 84ED      		ldi r24,lo8(12500)
+  86 0052 90E3      		ldi r25,hi8(12500)
+  87               	.LVL6:
+  88               	/* #APP */
+  89               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  90 0054 0197      		1: sbiw r24,1
+  91 0056 01F4      		brne 1b
+  92               	 ;  0 "" 2
+  93               	/* #NOAPP */
+  94               	.LBE21:
+  95               	.LBE20:
+  96               	.LBE19:
+  97               	.LBE18:
+  98               	.LM17:
+  99 0058 80E0      		ldi r24,lo8(0)
+ 100               	.LVL7:
+ 101               	/* epilogue start */
+ 102 005a 1F91      		pop r17
+ 103               	.LVL8:
+ 104 005c 0F91      		pop r16
+ 105               	.LVL9:
+ 106 005e 0895      		ret
+ 107               	.LFE8:
+ 109               	.global	RTCSetSecond
+ 111               	RTCSetSecond:
+ 112               	.LFB16:
+ 113               	.LM18:
+ 114               	.LVL10:
+ 115               	/* prologue: function */
+ 116               	/* frame size = 0 */
+ 117               	.LM19:
+ 118 0060 60E0      		ldi r22,lo8(0)
+ 119               	.LVL11:
+ 120 0062 90E0      		ldi r25,lo8(0)
+ 121               	.LVL12:
+ 122 0064 00C0      		rjmp .L6
+ 123               	.L8:
+ 124               	.LM20:
+ 125 0066 6F5F      		subi r22,lo8(-(1))
+ 126               	.LM21:
+ 127 0068 6A30      		cpi r22,lo8(10)
+ 128 006a 01F4      		brne .L7
+ 129               	.LM22:
+ 130 006c 9F5F      		subi r25,lo8(-(1))
+ 131 006e 60E0      		ldi r22,lo8(0)
+ 132               	.L7:
+ 133               	.LM23:
+ 134 0070 8150      		subi r24,lo8(-(-1))
+ 135               	.LVL13:
+ 136               	.L6:
+ 137               	.LM24:
+ 138 0072 8823      		tst r24
+ 139 0074 01F4      		brne .L8
+ 140               	.LM25:
+ 141 0076 6058      		subi r22,lo8(-(-128))
+ 142 0078 9295      		swap r25
+ 143 007a 907F      		andi r25,lo8(-16)
+ 144 007c 690F      		add r22,r25
+ 145 007e 0E94 0000 		call RTCWriteByte
+ 146               	.LVL14:
+ 147               	/* epilogue start */
+ 148               	.LM26:
+ 149 0082 0895      		ret
+ 150               	.LFE16:
+ 152               	.global	RTCSetMinute
+ 154               	RTCSetMinute:
+ 155               	.LFB15:
+ 156               	.LM27:
+ 157               	.LVL15:
+ 158               	/* prologue: function */
+ 159               	/* frame size = 0 */
+ 160               	.LM28:
+ 161 0084 90E0      		ldi r25,lo8(0)
+ 162               	.LVL16:
+ 163 0086 60E0      		ldi r22,lo8(0)
+ 164               	.LVL17:
+ 165 0088 00C0      		rjmp .L11
+ 166               	.L13:
+ 167               	.LM29:
+ 168 008a 9F5F      		subi r25,lo8(-(1))
+ 169               	.LM30:
+ 170 008c 9A30      		cpi r25,lo8(10)
+ 171 008e 01F4      		brne .L12
+ 172               	.LM31:
+ 173 0090 6F5F      		subi r22,lo8(-(1))
+ 174 0092 90E0      		ldi r25,lo8(0)
+ 175               	.L12:
+ 176               	.LM32:
+ 177 0094 8150      		subi r24,lo8(-(-1))
+ 178               	.LVL18:
+ 179               	.L11:
+ 180               	.LM33:
+ 181 0096 8823      		tst r24
+ 182 0098 01F4      		brne .L13
+ 183               	.LM34:
+ 184 009a 6295      		swap r22
+ 185 009c 607F      		andi r22,lo8(-16)
+ 186 009e 690F      		add r22,r25
+ 187 00a0 81E0      		ldi r24,lo8(1)
+ 188               	.LVL19:
+ 189 00a2 0E94 0000 		call RTCWriteByte
+ 190               	.LVL20:
+ 191               	/* epilogue start */
+ 192               	.LM35:
+ 193 00a6 0895      		ret
+ 194               	.LFE15:
+ 196               	.global	RTCSetHour
+ 198               	RTCSetHour:
+ 199               	.LFB14:
+ 200               	.LM36:
+ 201               	.LVL21:
+ 202               	/* prologue: function */
+ 203               	/* frame size = 0 */
+ 204               	.LM37:
+ 205 00a8 90E0      		ldi r25,lo8(0)
+ 206               	.LVL22:
+ 207 00aa 60E0      		ldi r22,lo8(0)
+ 208               	.LVL23:
+ 209 00ac 00C0      		rjmp .L16
+ 210               	.L18:
+ 211               	.LM38:
+ 212 00ae 9F5F      		subi r25,lo8(-(1))
+ 213               	.LM39:
+ 214 00b0 9A30      		cpi r25,lo8(10)
+ 215 00b2 01F4      		brne .L17
+ 216               	.LM40:
+ 217 00b4 6F5F      		subi r22,lo8(-(1))
+ 218 00b6 90E0      		ldi r25,lo8(0)
+ 219               	.L17:
+ 220               	.LM41:
+ 221 00b8 8150      		subi r24,lo8(-(-1))
+ 222               	.LVL24:
+ 223               	.L16:
+ 224               	.LM42:
+ 225 00ba 8823      		tst r24
+ 226 00bc 01F4      		brne .L18
+ 227               	.LM43:
+ 228 00be 6295      		swap r22
+ 229 00c0 607F      		andi r22,lo8(-16)
+ 230 00c2 690F      		add r22,r25
+ 231 00c4 82E0      		ldi r24,lo8(2)
+ 232               	.LVL25:
+ 233 00c6 0E94 0000 		call RTCWriteByte
+ 234               	.LVL26:
+ 235               	/* epilogue start */
+ 236               	.LM44:
+ 237 00ca 0895      		ret
+ 238               	.LFE14:
+ 240               	.global	RTCSetWeekday
+ 242               	RTCSetWeekday:
+ 243               	.LFB13:
+ 244               	.LM45:
+ 245               	.LVL27:
+ 246               	/* prologue: function */
+ 247               	/* frame size = 0 */
+ 248               	.LM46:
+ 249 00cc 90E0      		ldi r25,lo8(0)
+ 250               	.LVL28:
+ 251 00ce 60E0      		ldi r22,lo8(0)
+ 252               	.LVL29:
+ 253 00d0 00C0      		rjmp .L21
+ 254               	.L23:
+ 255               	.LM47:
+ 256 00d2 9F5F      		subi r25,lo8(-(1))
+ 257               	.LM48:
+ 258 00d4 9A30      		cpi r25,lo8(10)
+ 259 00d6 01F4      		brne .L22
+ 260               	.LM49:
+ 261 00d8 6F5F      		subi r22,lo8(-(1))
+ 262 00da 90E0      		ldi r25,lo8(0)
+ 263               	.L22:
+ 264               	.LM50:
+ 265 00dc 8150      		subi r24,lo8(-(-1))
+ 266               	.LVL30:
+ 267               	.L21:
+ 268               	.LM51:
+ 269 00de 8823      		tst r24
+ 270 00e0 01F4      		brne .L23
+ 271               	.LM52:
+ 272 00e2 6295      		swap r22
+ 273 00e4 607F      		andi r22,lo8(-16)
+ 274 00e6 690F      		add r22,r25
+ 275 00e8 83E0      		ldi r24,lo8(3)
+ 276               	.LVL31:
+ 277 00ea 0E94 0000 		call RTCWriteByte
+ 278               	.LVL32:
+ 279               	/* epilogue start */
+ 280               	.LM53:
+ 281 00ee 0895      		ret
+ 282               	.LFE13:
+ 284               	.global	RTCSetDate
+ 286               	RTCSetDate:
+ 287               	.LFB12:
+ 288               	.LM54:
+ 289               	.LVL33:
+ 290               	/* prologue: function */
+ 291               	/* frame size = 0 */
+ 292               	.LM55:
+ 293 00f0 90E0      		ldi r25,lo8(0)
+ 294               	.LVL34:
+ 295 00f2 60E0      		ldi r22,lo8(0)
+ 296               	.LVL35:
+ 297 00f4 00C0      		rjmp .L26
+ 298               	.L28:
+ 299               	.LM56:
+ 300 00f6 9F5F      		subi r25,lo8(-(1))
+ 301               	.LM57:
+ 302 00f8 9A30      		cpi r25,lo8(10)
+ 303 00fa 01F4      		brne .L27
+ 304               	.LM58:
+ 305 00fc 6F5F      		subi r22,lo8(-(1))
+ 306 00fe 90E0      		ldi r25,lo8(0)
+ 307               	.L27:
+ 308               	.LM59:
+ 309 0100 8150      		subi r24,lo8(-(-1))
+ 310               	.LVL36:
+ 311               	.L26:
+ 312               	.LM60:
+ 313 0102 8823      		tst r24
+ 314 0104 01F4      		brne .L28
+ 315               	.LM61:
+ 316 0106 6295      		swap r22
+ 317 0108 607F      		andi r22,lo8(-16)
+ 318 010a 690F      		add r22,r25
+ 319 010c 84E0      		ldi r24,lo8(4)
+ 320               	.LVL37:
+ 321 010e 0E94 0000 		call RTCWriteByte
+ 322               	.LVL38:
+ 323               	/* epilogue start */
+ 324               	.LM62:
+ 325 0112 0895      		ret
+ 326               	.LFE12:
+ 328               	.global	RTCSetMonth
+ 330               	RTCSetMonth:
+ 331               	.LFB11:
+ 332               	.LM63:
+ 333               	.LVL39:
+ 334               	/* prologue: function */
+ 335               	/* frame size = 0 */
+ 336               	.LM64:
+ 337 0114 90E0      		ldi r25,lo8(0)
+ 338               	.LVL40:
+ 339 0116 60E0      		ldi r22,lo8(0)
+ 340               	.LVL41:
+ 341 0118 00C0      		rjmp .L31
+ 342               	.L33:
+ 343               	.LM65:
+ 344 011a 9F5F      		subi r25,lo8(-(1))
+ 345               	.LM66:
+ 346 011c 9A30      		cpi r25,lo8(10)
+ 347 011e 01F4      		brne .L32
+ 348               	.LM67:
+ 349 0120 6F5F      		subi r22,lo8(-(1))
+ 350 0122 90E0      		ldi r25,lo8(0)
+ 351               	.L32:
+ 352               	.LM68:
+ 353 0124 8150      		subi r24,lo8(-(-1))
+ 354               	.LVL42:
+ 355               	.L31:
+ 356               	.LM69:
+ 357 0126 8823      		tst r24
+ 358 0128 01F4      		brne .L33
+ 359               	.LM70:
+ 360 012a 6295      		swap r22
+ 361 012c 607F      		andi r22,lo8(-16)
+ 362 012e 690F      		add r22,r25
+ 363 0130 85E0      		ldi r24,lo8(5)
+ 364               	.LVL43:
+ 365 0132 0E94 0000 		call RTCWriteByte
+ 366               	.LVL44:
+ 367               	/* epilogue start */
+ 368               	.LM71:
+ 369 0136 0895      		ret
+ 370               	.LFE11:
+ 372               	.global	RTCSetYear
+ 374               	RTCSetYear:
+ 375               	.LFB10:
+ 376               	.LM72:
+ 377               	.LVL45:
+ 378               	/* prologue: function */
+ 379               	/* frame size = 0 */
+ 380               	.LM73:
+ 381 0138 90E0      		ldi r25,lo8(0)
+ 382               	.LVL46:
+ 383 013a 60E0      		ldi r22,lo8(0)
+ 384               	.LVL47:
+ 385 013c 00C0      		rjmp .L36
+ 386               	.L38:
+ 387               	.LM74:
+ 388 013e 9F5F      		subi r25,lo8(-(1))
+ 389               	.LM75:
+ 390 0140 9A30      		cpi r25,lo8(10)
+ 391 0142 01F4      		brne .L37
+ 392               	.LM76:
+ 393 0144 6F5F      		subi r22,lo8(-(1))
+ 394 0146 90E0      		ldi r25,lo8(0)
+ 395               	.L37:
+ 396               	.LM77:
+ 397 0148 8150      		subi r24,lo8(-(-1))
+ 398               	.LVL48:
+ 399               	.L36:
+ 400               	.LM78:
+ 401 014a 8823      		tst r24
+ 402 014c 01F4      		brne .L38
+ 403               	.LM79:
+ 404 014e 6295      		swap r22
+ 405 0150 607F      		andi r22,lo8(-16)
+ 406 0152 690F      		add r22,r25
+ 407 0154 86E0      		ldi r24,lo8(6)
+ 408               	.LVL49:
+ 409 0156 0E94 0000 		call RTCWriteByte
+ 410               	.LVL50:
+ 411               	/* epilogue start */
+ 412               	.LM80:
+ 413 015a 0895      		ret
+ 414               	.LFE10:
+ 416               	.global	InitRTC
+ 418               	InitRTC:
+ 419               	.LFB7:
+ 420               	.LM81:
+ 421               	/* prologue: function */
+ 422               	/* frame size = 0 */
+ 423               	.LM82:
+ 424 015c 80E0      		ldi r24,lo8(0)
+ 425 015e 68E8      		ldi r22,lo8(-120)
+ 426 0160 0E94 0000 		call RTCWriteByte
+ 427               	.LBB22:
+ 428               	.LBB23:
+ 429               	.LBB24:
+ 430               	.LBB25:
+ 431               	.LM83:
+ 432 0164 84ED      		ldi r24,lo8(12500)
+ 433 0166 90E3      		ldi r25,hi8(12500)
+ 434               	.LVL51:
+ 435               	/* #APP */
+ 436               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 437 0168 0197      		1: sbiw r24,1
+ 438 016a 01F4      		brne 1b
+ 439               	 ;  0 "" 2
+ 440               	/* epilogue start */
+ 441               	/* #NOAPP */
+ 442               	.LBE25:
+ 443               	.LBE24:
+ 444               	.LBE23:
+ 445               	.LBE22:
+ 446               	.LM84:
+ 447 016c 0895      		ret
+ 448               	.LFE7:
+ 546               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtc.c
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:2      *ABS*:0000003f __SREG__
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:3      *ABS*:0000003e __SP_H__
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:4      *ABS*:0000003d __SP_L__
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:5      *ABS*:00000034 __CCP__
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:18     .text:00000000 RTCReadByte
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:56     .text:0000002e RTCWriteByte
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:111    .text:00000060 RTCSetSecond
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:154    .text:00000084 RTCSetMinute
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:198    .text:000000a8 RTCSetHour
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:242    .text:000000cc RTCSetWeekday
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:286    .text:000000f0 RTCSetDate
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:330    .text:00000114 RTCSetMonth
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:374    .text:00000138 RTCSetYear
+C:\Users\RAUM\AppData\Local\Temp/cc2V29xi.s:418    .text:0000015c InitRTC
+
+UNDEFINED SYMBOLS
+TWIStart
+TWIWrite
+TWIReadNACK
+TWIStop
